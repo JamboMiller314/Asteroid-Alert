@@ -36,7 +36,9 @@ void ScreenManager::processEvents() {
 			mEvent->removeEvent(i);
 		}
 		else if (events[i] == "GameOver") {
-			mCurrentScreen = Start;
+			delete mPlayScreen;
+			mPlayScreen = new PlayScreen();
+			mCurrentScreen = Play;
 			mEvent->removeEvent(i);
 		}
 	}
@@ -103,7 +105,7 @@ ScreenManager::ScreenManager() {
 
 	mMusicSelection = 0;
 
-	//mAudio->PlaySFX("MUS/BackgroundMusic0.wav", 0, 1);
+	mAudio->PlaySFX("MUS/Space.wav", 0, 1);
 }
 
 ScreenManager::~ScreenManager() {

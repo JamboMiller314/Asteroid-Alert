@@ -76,6 +76,7 @@ void Asteroids::Update()
 	if (Position().x < - 650)
 	{
 		Respawn();
+		mMoveSpeed += 50;
 	}
 
 	mTimer->Reset();
@@ -90,5 +91,6 @@ void Asteroids::Render()
 
 void Asteroids::Hit(PhysEntity* other)
 {
+	
 	mWasHit = true;
 }

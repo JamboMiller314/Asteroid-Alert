@@ -24,15 +24,20 @@ private:
 	Asteroids* mAsteroids;
 	std::vector<Asteroids*> mAsteroid;
 	PlayScreenUI* mSideBar;
-
+	GameEntity* mLivesBar;
+	int mPlayerLives;
+	GLTexture* mLives;
+	GLTexture* mGameOver;
+	GLTexture* mLevelComplete;
 	bool mWasHit;
-	
+	bool mLevelDone;
 
 public:
 	PlayScreen();
 	~PlayScreen();
 	void generateAsteroids();
-	
+	void UpdateLives();
+	void StartNewLevel();
 	void Update() override;
 	void Render() override;
 };
