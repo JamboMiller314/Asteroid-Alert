@@ -25,7 +25,8 @@ PlayScreen::PlayScreen() {
 	mLevelComplete->Parent(this);
 	mLevelComplete->Position(Graphics::SCREEN_WIDTH * 0.5f, Graphics::SCREEN_HEIGHT * 0.5f);
 
-
+	mTimerDisplay = new Scoreboard({ 238, 30, 238 }); 
+	mTimerDisplay->Position(Vector2(Graphics::SCREEN_WIDTH * 0.5f, 20)); 
 	
 }
 
@@ -42,7 +43,8 @@ PlayScreen::~PlayScreen() {
 	delete mLives;
 	mSideBar = nullptr;
 	
-	
+	delete mTimerDisplay;
+	mTimerDisplay = nullptr;
 	
 }
 
@@ -99,9 +101,17 @@ void PlayScreen::Update() {
 	}
 	
 	mLives->Update();
+	mTimer->Update();
+	float timeElapsed = mTimer->TotalTime();
 	
+	mTimerDisplay->Score(timeElapsed);
 	
-	
+	if (std::stof(mTimerDisplay->Score()) == 100.0f)
+	{
+		Active(false);
+
+		
+	}
 	generateAsteroids();
 	
 	
@@ -137,6 +147,7 @@ void PlayScreen::Update() {
 	
 	if (Active())
 	{
+		
 		if (mPlayer != nullptr)
 		{
 
@@ -163,15 +174,6 @@ void PlayScreen::Update() {
 			}
 		}
 
-		if (mTimer->TotalTime() == 100.0f)
-		{
-			mLevelDone = true;
-			Active(false);
-			
-			mTimer->Reset();
-			mTimer->Update();
-			Active(true);
-		}
 	}	
 
 	
@@ -191,16 +193,20 @@ void PlayScreen::Update() {
 	if(mPlayer == nullptr && mPlayerLives > 0)
 	{
 		mTimer->Update();
-		//mTimer->TotalTime() == 5.0f;
+		
 		if(mTimer->TotalTime() > 5.0f)
 		{
 			Player::Release();
 			mPlayer = Player::Instance();
 			mPlayer->Position(Graphics::SCREEN_WIDTH / 2, Graphics::SCREEN_HEIGHT / 2);
-			mTimer->Reset();
+			
 		}
+		
 	}
-	
+	if (mPlayerLives == 0)
+	{
+		mTimer->Reset();
+	}
 }
 
 void PlayScreen::Render() {
@@ -208,7 +214,13 @@ void PlayScreen::Render() {
 	{
 		mLevelComplete->Render();
 	}
-	
+	mTimerDisplay->Render();
+	if (std::stof(mTimerDisplay->Score()) == 100.0f)
+	{
+		mLevelComplete->Render();
+
+
+	}
 
 	if (mGameOver != nullptr)
 	{

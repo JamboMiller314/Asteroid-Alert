@@ -138,7 +138,7 @@ namespace SDLFramework {
 
 	void GLGraphics::Render() {
 		SDL_GL_SwapWindow(mWindow);
-		SDL_ShowCursor(SDL_DISABLE);
+		
 	}
 	
 	bool GLGraphics::Init() {

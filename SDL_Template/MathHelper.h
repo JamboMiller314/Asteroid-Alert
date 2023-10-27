@@ -4,7 +4,9 @@
 #include <string>
 #include <math.h>
 #include <ostream>
-
+#include <sstream>
+#include <iostream>
+#include <iomanip>
 namespace SDLFramework {
 
 #define PI 3.1415926535f
@@ -276,7 +278,19 @@ namespace SDLFramework {
 
 		return str;
 	}
+	inline std::string FormatTime(float totalSeconds) {
+		int totalMilliseconds = static_cast<int>(totalSeconds * 1000);
+		int remainingMilliseconds = totalMilliseconds % (60 * 1000);
 
+		int seconds = remainingMilliseconds / 1000;
+		int milliseconds = remainingMilliseconds % 1000;
+
+		std::ostringstream formattedTime;
+		formattedTime << std::setfill('0') << std::setw(2) << seconds << "."
+			<< std::setfill('0') << std::setw(3) << milliseconds;
+
+		return formattedTime.str();
+	}
 	struct Vertex {
 		Vector2 position;
 

@@ -82,8 +82,7 @@ void ScreenManager::Render() {
 		mPlayScreen->Render();
 		break;
 	}
-
-	mCursor->Render();
+	
 }
 
 ScreenManager::ScreenManager() {

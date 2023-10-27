@@ -25,10 +25,12 @@ private:
 	std::vector<Asteroids*> mAsteroid;
 	PlayScreenUI* mSideBar;
 	GameEntity* mLivesBar;
-	int mPlayerLives;
+	Scoreboard* mTimerDisplay;
 	GLTexture* mLives;
 	GLTexture* mGameOver;
 	GLTexture* mLevelComplete;
+
+	int mPlayerLives;
 	bool mWasHit;
 	bool mLevelDone;
 
