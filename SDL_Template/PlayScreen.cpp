@@ -10,7 +10,7 @@ PlayScreen::PlayScreen() {
 	mPlayerLives = 3;
 
 	mPlayer = Player::Instance();
-	mPlayer->Position(Graphics::SCREEN_WIDTH / 2, Graphics::SCREEN_HEIGHT / 2);
+	mPlayer->Position(Graphics::SCREEN_WIDTH * 0.1f, Graphics::SCREEN_HEIGHT / 2);
 	
 	
 
@@ -39,13 +39,15 @@ PlayScreen::~PlayScreen() {
 	
 	delete mTimer;
 	mTimer = nullptr;
-
+	
 	delete mLives;
-	mSideBar = nullptr;
+	mLives = nullptr;
+	
 	
 	delete mTimerDisplay;
 	mTimerDisplay = nullptr;
-	
+	delete mLevelComplete;
+	mLevelComplete = nullptr;
 }
 
 
@@ -61,7 +63,7 @@ void PlayScreen::UpdateLives()
 void PlayScreen::generateAsteroids()
 {
 	
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		if (mAsteroid.size() < 9)
 		{
@@ -79,8 +81,8 @@ void PlayScreen::generateAsteroids()
 void PlayScreen::StartNewLevel()
 {
 
-	mPlayer = Player::Instance();
-	mPlayer->Position(Graphics::SCREEN_WIDTH / 2, Graphics::SCREEN_HEIGHT / 2);
+	//mPlayer = Player::Instance();
+	//mPlayer->Position(Graphics::SCREEN_WIDTH / 2, Graphics::SCREEN_HEIGHT / 2);
 
 
 
@@ -109,7 +111,7 @@ void PlayScreen::Update() {
 	if (std::stof(mTimerDisplay->Score()) == 100.0f)
 	{
 		Active(false);
-
+		mTimerDisplay->Active(false);
 		
 	}
 	generateAsteroids();
@@ -120,9 +122,10 @@ void PlayScreen::Update() {
 		
 		mPlayerLives--;
 		UpdateLives();
-		
 		mPlayer = nullptr;
 		
+		
+
 		if (mPlayerLives == 0)
 		{
 			Active(false);
@@ -194,11 +197,11 @@ void PlayScreen::Update() {
 	{
 		mTimer->Update();
 		
-		if(mTimer->TotalTime() > 5.0f)
+		if(mTimer->TotalTime() >= 3.0f)
 		{
 			Player::Release();
 			mPlayer = Player::Instance();
-			mPlayer->Position(Graphics::SCREEN_WIDTH / 2, Graphics::SCREEN_HEIGHT / 2);
+			mPlayer->Position(Graphics::SCREEN_WIDTH * 0.1f, Graphics::SCREEN_HEIGHT / 2);
 			
 		}
 		

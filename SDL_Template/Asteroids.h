@@ -18,7 +18,7 @@ using namespace SDLFramework;
 
 class Asteroids : public PhysEntity {
 public:
-	 enum class ObjectType {Asteroid};
+	 enum class ObjectType {Asteroid, Planet};
 
 protected:
 	ObjectType mObjectType;

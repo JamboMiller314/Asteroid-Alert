@@ -40,7 +40,7 @@ Player::Player() {
 	mYMoveBounds = Vector2(0.0f, Graphics::SCREEN_HEIGHT);
 
 	mScore = 0;
-	mMoveSpeed = 250.0f;
+	mMoveSpeed = 350.0f;
 
 	loadData();
 
@@ -62,13 +62,15 @@ Player::~Player() {
 	PhysicsManager::Instance()->UnregisterEntity(mId);
 }
 
+void Player::respawn()
+{
+	if (mTimer->TotalTime() >= 3)
+	{
+
+	}
+}
 void Player::move() {
-	if (mInput->KeyDown(SDL_SCANCODE_LEFT)) {
-		Translate(-Vec2_Right * mMoveSpeed * mTimer->DeltaTime());
-	}
-	if (mInput->KeyDown(SDL_SCANCODE_RIGHT)) {
-		Translate(Vec2_Right * mMoveSpeed * mTimer->DeltaTime());
-	}
+	
 	if (mInput->KeyDown(SDL_SCANCODE_DOWN)) {
 		Translate(Vec2_Up * mMoveSpeed * mTimer->DeltaTime());
 	}

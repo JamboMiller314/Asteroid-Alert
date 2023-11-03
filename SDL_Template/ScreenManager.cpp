@@ -18,7 +18,7 @@ void ScreenManager::Release() {
 void ScreenManager::playMusic() {
 	if (mTimer->TotalTime() > 85.0f) {
 		mMusicSelection++;
-		mAudio->PlaySFX("MUS/BackgroundMusic" + std::to_string(mMusicSelection) + ".wav", 0, 1);
+		//mAudio->PlaySFX("MUS/BackgroundMusic" + std::to_string(mMusicSelection) + ".wav", 0, 1);
 		mTimer->Reset();
 
 		if (mMusicSelection >= 9) {

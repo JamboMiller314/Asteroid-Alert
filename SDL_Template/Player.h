@@ -37,7 +37,7 @@ public:
 	~Player();
 
 	void move();
-
+	void respawn();
 	int score();
 	void score(int value);
 

@@ -18,7 +18,7 @@ Asteroids::Asteroids(ObjectType type)
 		mAsteroids->Parent(this);
 		mAsteroids->Position(Vec2_Zero);
 		
-		AddCollider(new BoxCollider(mAsteroids->ScaledDimensions()));
+		AddCollider(new BoxCollider(Vector2(48, 41)));
 
 		mId = PhysicsManager::Instance()->RegisterEntity(this, PhysicsManager::CollisionLayers::Asteroid);
 	}
@@ -76,7 +76,7 @@ void Asteroids::Update()
 	if (Position().x < - 650)
 	{
 		Respawn();
-		mMoveSpeed += 50;
+		mMoveSpeed += 15;
 	}
 
 	mTimer->Reset();
